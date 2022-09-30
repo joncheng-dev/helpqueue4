@@ -1,12 +1,11 @@
 import React from "react";
-import Header from "./Header";
 
-function App() {
+function Header() {
   return (
     <React.Fragment>
-      <Header />
+      <h3>Ticket Queue</h3>
     </React.Fragment>
   );
 }
 
-export default App;
+export default Header;
