@@ -3,7 +3,7 @@ import React from "react";
 function Header() {
   return (
     <React.Fragment>
-      <h3>Ticket Queue</h3>
+      <h1>Ticket Queue</h1>
     </React.Fragment>
   );
 }
