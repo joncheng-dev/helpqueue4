@@ -4,9 +4,11 @@ import PropTypes from "prop-types";
 function Ticket(props) {
   return (
     <React.Fragment>
-      <h3>{props.names}</h3>
+      <h2>{props.names}</h2>
       <h3>{props.location}</h3>
-      <h3>{props.issue}</h3>
+      <h3>
+        <em>{props.issue}</em>
+      </h3>
       <hr />
     </React.Fragment>
   );

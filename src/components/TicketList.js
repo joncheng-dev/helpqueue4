@@ -25,7 +25,6 @@ function TicketList() {
       {mainTicketList.map((ticket, index) => (
         <Ticket names={ticket.names} location={ticket.location} issue={ticket.issue} key={index} />
       ))}
-      ;
     </React.Fragment>
   );
 }
