@@ -7,6 +7,7 @@ class TicketControl extends React.Component {
     super(props);
     this.state = {
       formVisible: false,
+      mainTicketList: [],
     };
   }
 
@@ -14,16 +15,24 @@ class TicketControl extends React.Component {
     this.setState((prevState) => ({ formVisible: !prevState.formVisible }));
   };
 
+  handleAddingNewTicketToList = (newTicket) => {
+    const newMainTicketList = this.state.mainTicketList.concat(newTicket);
+    this.setState({
+      formVisible: false,
+      mainTicketList: newMainTicketList,
+    });
+  };
+
   render() {
     let pageVisible = null;
     let buttonText = null;
 
     if (this.state.formVisible) {
-      pageVisible = <NewTicketForm />;
+      pageVisible = <NewTicketForm onNewTicketCreation={this.handleAddingNewTicketToList} />;
       buttonText = "Back to Ticket List";
     } else {
-      pageVisible = <TicketList />;
-      buttonText = "Submit New Help Ticket";
+      pageVisible = <TicketList ticketList={this.state.mainTicketList} />;
+      buttonText = "Add New Help Ticket";
     }
 
     return (
