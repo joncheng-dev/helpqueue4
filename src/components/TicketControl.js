@@ -1,6 +1,7 @@
 import React from "react";
 import TicketList from "./TicketList";
 import NewTicketForm from "./NewTicketForm";
+import TicketDetail from "./TicketDetail";
 
 class TicketControl extends React.Component {
   constructor(props) {
@@ -8,11 +9,24 @@ class TicketControl extends React.Component {
     this.state = {
       formVisible: false,
       mainTicketList: [],
+      selectedTicket: null,
     };
   }
 
   handleClick = () => {
-    this.setState((prevState) => ({ formVisible: !prevState.formVisible }));
+    if (this.state.selectedTicket !== null) {
+      this.setState({
+        formVisible: false,
+        selectedTicket: null,
+      });
+    } else {
+      this.setState((prevState) => ({ formVisible: !prevState.formVisible }));
+    }
+  };
+
+  handleChangingSelectedTicket = (id) => {
+    const selectedTicket = this.state.mainTicketList.filter((ticket) => ticket.id === id)[0];
+    this.setState({ selectedTicket: selectedTicket });
   };
 
   handleAddingNewTicketToList = (newTicket) => {
@@ -27,11 +41,14 @@ class TicketControl extends React.Component {
     let pageVisible = null;
     let buttonText = null;
 
-    if (this.state.formVisible) {
+    if (this.state.selectedTicket !== null) {
+      pageVisible = <TicketDetail ticket={this.state.selectedTicket} />;
+      buttonText = "Back to Ticket List";
+    } else if (this.state.formVisible) {
       pageVisible = <NewTicketForm onNewTicketCreation={this.handleAddingNewTicketToList} />;
       buttonText = "Back to Ticket List";
     } else {
-      pageVisible = <TicketList ticketList={this.state.mainTicketList} />;
+      pageVisible = <TicketList ticketList={this.state.mainTicketList} onTicketSelection={this.handleChangingSelectedTicket} />;
       buttonText = "Add New Help Ticket";
     }
 

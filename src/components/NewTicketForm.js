@@ -15,13 +15,19 @@ function NewTicketForm(props) {
 
   return (
     <React.Fragment>
-      <h3>This is a form.</h3>
+      <h3>Fill out the form to add a help ticket.</h3>
       <form onSubmit={handleNewTicketSubmit}>
-        <input type="text" name="names" placeholder="Name(s)" />
-        <input type="text" name="location" placeholder="Location" />
-        <textarea name="issue" placeholder="Describe the problem" />
+        <p>Names:</p>
+        <input type="text" name="names" placeholder="Name(s)" required />
+        <p>Location:</p>
+        <input type="text" name="location" placeholder="Location" required />
+        <p>Issue:</p>
+        <textarea name="issue" placeholder="Describe the problem" required />
+        <br />
+        <br />
         <button type="submit">Submit Ticket</button>
       </form>
+      <br />
     </React.Fragment>
   );
 }
