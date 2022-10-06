@@ -14,7 +14,7 @@ function TicketDetail(props) {
         <em>{ticket.issue}</em>
       </h3>
       <hr />
-      <button>Edit Ticket</button>
+      <button onClick={props.onClickingEdit}>Edit Ticket</button>
       <button onClick={() => onClickingDelete(ticket.id)}>Delete Ticket</button>
     </React.Fragment>
   );
@@ -23,6 +23,7 @@ function TicketDetail(props) {
 TicketDetail.propTypes = {
   ticket: PropTypes.object,
   onClickingDelete: PropTypes.func,
+  onClickingEdit: PropTypes.func,
 };
 
 export default TicketDetail;

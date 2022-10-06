@@ -2,6 +2,7 @@ import React from "react";
 import TicketList from "./TicketList";
 import NewTicketForm from "./NewTicketForm";
 import TicketDetail from "./TicketDetail";
+import EditTicketForm from "./EditTicketForm";
 
 class TicketControl extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class TicketControl extends React.Component {
       formVisible: false,
       mainTicketList: [],
       selectedTicket: null,
+      editing: false,
     };
   }
 
@@ -46,12 +48,23 @@ class TicketControl extends React.Component {
     });
   };
 
+  handleEditClick = () => {
+    this.setState({
+      editing: true,
+    });
+  };
+
   render() {
     let pageVisible = null;
     let buttonText = null;
 
-    if (this.state.selectedTicket !== null) {
-      pageVisible = <TicketDetail ticket={this.state.selectedTicket} onClickingDelete={this.handleDeletingTicket} />;
+    if (this.state.editing) {
+      pageVisible = <EditTicketForm ticket={this.state.selectedTicket} />;
+      buttonText = "Back to Ticket List";
+    } else if (this.state.selectedTicket !== null) {
+      pageVisible = (
+        <TicketDetail ticket={this.state.selectedTicket} onClickingDelete={this.handleDeletingTicket} onClickingEdit={this.handleEditClick} />
+      );
       buttonText = "Back to Ticket List";
     } else if (this.state.formVisible) {
       pageVisible = <NewTicketForm onNewTicketCreation={this.handleAddingNewTicketToList} />;
