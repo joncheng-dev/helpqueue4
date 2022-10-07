@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function TicketDetail(props) {
-  const { ticket, onClickingDelete } = props;
+  const { ticket } = props;
 
   return (
     <React.Fragment>
@@ -15,7 +15,7 @@ function TicketDetail(props) {
       </h3>
       <hr />
       <button onClick={props.onClickingEdit}>Edit Ticket</button>
-      <button onClick={() => onClickingDelete(ticket.id)}>Delete Ticket</button>
+      <button onClick={() => props.onClickingDelete(ticket.id)}>Delete Ticket</button>
     </React.Fragment>
   );
 }

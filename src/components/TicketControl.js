@@ -20,6 +20,7 @@ class TicketControl extends React.Component {
       this.setState({
         formVisible: false,
         selectedTicket: null,
+        editing: false,
       });
     } else {
       this.setState((prevState) => ({ formVisible: !prevState.formVisible }));
@@ -49,8 +50,15 @@ class TicketControl extends React.Component {
   };
 
   handleEditClick = () => {
+    this.setState({ editing: true });
+  };
+
+  handleEditingTicket = (ticketToEdit) => {
+    const editedMainTicketList = this.state.mainTicketList.filter((ticket) => ticket.id !== this.state.selectedTicket.id).concat(ticketToEdit);
     this.setState({
-      editing: true,
+      mainTicketList: editedMainTicketList,
+      selectedTicket: null,
+      editing: false,
     });
   };
 
@@ -59,7 +67,7 @@ class TicketControl extends React.Component {
     let buttonText = null;
 
     if (this.state.editing) {
-      pageVisible = <EditTicketForm ticket={this.state.selectedTicket} />;
+      pageVisible = <EditTicketForm ticket={this.state.selectedTicket} onEditTicket={this.handleEditingTicket} />;
       buttonText = "Back to Ticket List";
     } else if (this.state.selectedTicket !== null) {
       pageVisible = (
